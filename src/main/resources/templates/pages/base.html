@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <STYLE>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        #users {
+            list-style: none;
+            padding: 0;
+        }
+        #users > li {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: box-shadow 0.3s ease;
+        }
+        #users > li:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        form {
+            display: inline-block;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        button, input[type=submit] {
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 5px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, input[type=submit]:hover {
+            background-color: #0056b3;
+        }
+        .user-info {
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        .user-action {
+            margin-left: auto;
+        }
+    </STYLE>
+</head>
+<body>
+<label for="users">Список пользователей:</label>
+<ol id="users">
+        <li th:each="user : ${allUsers}">
+            <span th:text="${user.getName()}">Имя</span>
+            <span th:text="${user.getSurname()}">Фамилия</span>
+            <span th:text="${user.getAge()}">Возраст</span>
+            <span th:text="${user.getJob()}">Профессия</span>
+            <span th:text="${user.getEmail()}">Электронный адрес</span>
+            <button th:onclick="|location.href='/users/show?id=' + ${user.id}|">Изменить</button>
+            <form th:method="POST" th:action="@{/users/delete(id=${user.getId()})}">
+                <input type="submit" value="Удалить"/>
+            </form>
+
+        </li>
+</ol>
+<button th:onclick="|location.href='/users/new'|">Создать нового пользователя</button>
+
+</body>
+</html>
