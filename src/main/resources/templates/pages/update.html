@@ -64,6 +64,23 @@
 <form th:method="POST" th:action="@{/users}" th:object="${singleUser}">
     <ul>
         <li>
+            <label for="username">Username:</label>
+            <input type="text" th:field="*{username}" id="username"/>
+        </li>
+        <li>
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{password}" id="password"/>
+        </li>
+        <li>
+            <label>
+                <select th:field="*{roles}">
+                    <option th:value="1">User</option>
+
+                    <option th:value="2">Admin</option>
+                </select>
+            </label>
+        </li>
+        <li>
             <label for="name">Name:</label>
             <input type="text" th:field="*{name}" id="name" />
         </li>
@@ -83,6 +100,7 @@
             <label for="email">Email:</label>
             <input type="text" th:field="*{email}" id="email"/>
         </li>
+
         <li>
             <input type="hidden" th:field="*{id}"/>
             <button type="submit">Отправить</button>

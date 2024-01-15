@@ -62,14 +62,14 @@
             <span th:text="${user.getAge()}">Возраст</span>
             <span th:text="${user.getJob()}">Профессия</span>
             <span th:text="${user.getEmail()}">Электронный адрес</span>
-            <button th:onclick="|location.href='/users/show?id=' + ${user.id}|">Изменить</button>
-            <form th:method="POST" th:action="@{/users/delete(id=${user.getId()})}">
+            <button th:onclick="|location.href='/admin/show?id=' + ${user.id}|">Изменить</button>
+            <form th:method="POST" th:action="@{/admin/delete(id=${user.getId()})}">
                 <input type="submit" value="Удалить"/>
             </form>
 
         </li>
 </ol>
-<button th:onclick="|location.href='/users/new'|">Создать нового пользователя</button>
+<button th:onclick="|location.href='/admin/new'|">Создать нового пользователя</button>
 
 </body>
 </html>

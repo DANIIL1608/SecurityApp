@@ -7,10 +7,11 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 @Repository
 public class UserDAOImp implements UserDAO{
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     public UserDAOImp(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -37,4 +38,14 @@ public class UserDAOImp implements UserDAO{
     public void delete(int id) {
         entityManager.remove(entityManager.find(User.class, id));
     }
+
+    @Override
+    public User findByUsername(String username) {
+        TypedQuery<User> query = entityManager.createQuery("from User where name = :username", User.class);
+        query.setParameter("username", username);
+        List<User> users = query.getResultList();
+        if (users.isEmpty()) return null;
+        return users.get(0);
+    }
+
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+
+</head>
+<body>
+<h1>Register</h1>
+<form th:method="POST" th:action="@{/reg}" th:object="${user}">
+    <label for="username">Username: </label>
+    <input type="text" id="username" th:field="*{username}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Errors</div>
+    <br/>
+
+    <label for="password">Password: </label>
+    <input type="password" id="password" th:field="*{password}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Errors</div>
+    <br/>
+
+    <label for="name">Name: </label>
+    <input type="text" id="name" th:field="*{name}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Errors</div>
+    <br/>
+
+    <label for="surname">Surname: </label>
+    <input type="text" id="surname" th:field="*{surname}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Errors</div>
+    <br/>
+
+    <label for="job">Job: </label>
+    <input type="text" id="job" th:field="*{job}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('job')}" th:errors="*{job}">Job Errors</div>
+    <br/>
+
+    <label for="email">Email: </label>
+    <input type="email" id="email" th:field="*{email}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Errors</div>
+    <br/>
+
+    <label for="age">Age: </label>
+    <input type="text" id="age" th:field="*{age}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Errors</div>
+    <br/>
+
+    <label>Select Role</label>
+    <label>
+        <select th:field="*{roles}">
+            <option value="">-- Select Role --</option>
+            <option th:value="ROLE_USER">User</option>
+            <option th:value="ROLE_ADMIN">Admin</option>
+        </select>
+    </label>
+    <div STYLE="color: red" class="error" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Role error</div>
+    <br/>
+
+    <input type="submit" value="Register"/>
+</form>
+</body>
+</html>
