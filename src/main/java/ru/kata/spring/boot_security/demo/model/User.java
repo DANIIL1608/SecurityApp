@@ -130,7 +130,7 @@ public class User implements UserDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getAge(), getName(), getSurname(), getJob(), getEmail(), getUsername(), getPassword(), getRoles());
+        return Objects.hash(getId(), getAge(), getName(), getSurname(), getJob(), getEmail(), getUsername(), getPassword());
     }
 
     @Override
