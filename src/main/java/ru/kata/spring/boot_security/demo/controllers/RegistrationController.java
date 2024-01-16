@@ -24,7 +24,6 @@ public class RegistrationController {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final UserValidation userValidation;
-
     private final RoleService roleService;
 
     public RegistrationController(PasswordEncoder passwordEncoder, UserService userService, RoleService roleService, UserValidation userValidation, RoleService roleService1) {
@@ -33,11 +32,16 @@ public class RegistrationController {
         this.userValidation = userValidation;
         this.roleService = roleService;
     }
+    @GetMapping("/index")
+    public String startPage() {
+        return "index";
+    }
 
     @GetMapping("/login")
     public String loginPage() {
         return "security/login";
     }
+
     @GetMapping("/reg")
     public String registration(@ModelAttribute("user") User user) {
         return "security/registration";
@@ -48,14 +52,6 @@ public class RegistrationController {
         userValidation.validate(user, bindingResult);
         if (bindingResult.hasErrors())
             return "security/registration";
-        Set<Role> roles = new HashSet<>();
-        if(user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))) {
-            roles.add(roleService.findById(2));
-        } else {
-            roles.add(roleService.findById(1));
-        }
-        user.setRoles(roles);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "redirect:/login";
     }

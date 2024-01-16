@@ -27,7 +27,7 @@ public class UserValidation implements Validator {
         User user = (User) target;
         User userExist;
         try {
-            userExist = (User) userService.loadUserByUsername(user.getUsername());
+            userExist = userService.loadUserByUsername(user.getUsername());
         } catch (UsernameNotFoundException ignored) {
             return;
         }

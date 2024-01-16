@@ -77,9 +77,9 @@
         <li>
             <label>
                 <select th:field="*{roles}">
-                    <option th:value="1">User</option>
-
-                    <option th:value="2">Admin</option>
+                    <option value="">-- Select Role --</option>
+                    <option th:value="ROLE_USER">User</option>
+                    <option th:value="ROLE_ADMIN">Admin</option>
                 </select>
             </label>
         </li>

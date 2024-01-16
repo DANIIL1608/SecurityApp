@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private int age;
 
     private String name;
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Уж придумай что-нить")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -43,15 +43,8 @@ public class User implements UserDetails {
 
     public User() {
     }
-
-    public User(int age, String name, String surname, String job, String email, String username, String password) {
-        this.age = age;
-        this.name = name;
-        this.surname = surname;
-        this.job = job;
-        this.email = email;
-        this.username = username;
-        this.password = password;
+    public User(User user) {
+        BeanUtils.copyProperties(user, this);
     }
 
     public void setPassword(String password) {

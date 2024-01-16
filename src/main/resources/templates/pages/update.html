@@ -61,7 +61,7 @@
     }</style>
 </head>
 <body>
-<form th:method="POST" th:action="@{/users}" th:object="${singleUser}">
+<form th:method="POST" th:action="@{/admin}" th:object="${singleUser}">
     <ul>
         <li>
             <label for="username">Username:</label>
@@ -74,9 +74,9 @@
         <li>
             <label>
                 <select th:field="*{roles}">
-                    <option th:value="1">User</option>
-
-                    <option th:value="2">Admin</option>
+                    <option value="">-- Select Role --</option>
+                    <option th:value="ROLE_USER">User</option>
+                    <option th:value="ROLE_ADMIN">Admin</option>
                 </select>
             </label>
         </li>

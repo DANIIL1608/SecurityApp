@@ -54,22 +54,74 @@
     </STYLE>
 </head>
 <body>
-<label for="users">Список пользователей:</label>
-<ol id="users">
-        <li th:each="user : ${allUsers}">
-            <span th:text="${user.getName()}">Имя</span>
-            <span th:text="${user.getSurname()}">Фамилия</span>
-            <span th:text="${user.getAge()}">Возраст</span>
-            <span th:text="${user.getJob()}">Профессия</span>
-            <span th:text="${user.getEmail()}">Электронный адрес</span>
-            <button th:onclick="|location.href='/admin/show?id=' + ${user.id}|">Изменить</button>
-            <form th:method="POST" th:action="@{/admin/delete(id=${user.getId()})}">
-                <input type="submit" value="Удалить"/>
-            </form>
+<!--<label for="users">Список пользователей:</label>-->
+<!--<ol id="users">-->
+<!--        <li th:each="user : ${allUsers}">-->
+<!--            <span th:text="${user.getName()}">Имя</span>-->
+<!--            <span th:text="${user.getSurname()}">Фамилия</span>-->
+<!--            <span th:text="${user.getAge()}">Возраст</span>-->
+<!--            <span th:text="${user.getJob()}">Профессия</span>-->
+<!--            <span th:text="${user.getEmail()}">Электронный адрес</span>-->
+<!--            <button th:onclick="|location.href='/admin/show?id=' + ${user.id}|">Изменить</button>-->
+<!--            <form th:method="POST" th:action="@{/admin/delete(id=${user.getId()})}">-->
+<!--                <input type="submit" value="Удалить"/>-->
+<!--            </form>-->
 
-        </li>
-</ol>
-<button th:onclick="|location.href='/admin/new'|">Создать нового пользователя</button>
+<!--        </li>-->
+<!--</ol>-->
+<!--<button th:onclick="|location.href='/admin/new'|">Создать нового пользователя</button>-->
+
+<h1>Admin Panel</h1>
+<div>
+    <h2>User List</h2>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Job</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.id}">Id</td>
+            <td th:text="${user.username}">Username</td>
+            <td th:text="${user.name}">Name</td>
+            <td th:text="${user.surname}">Surname</td>
+            <td th:text="${user.job}">Job</td>
+            <td th:text="${user.age}">Age</td>
+            <td th:text="${user.email}">Email</td>
+            <td>
+                <span th:each="role : ${user.roles}" th:text="${role.getAuthority()} + '; '">Roles</span>
+            </td>
+            <td>
+                <button>
+                    <a th:href="@{/admin/show(id=${user.id})}">Edit</a>
+                </button>
+            </td>
+            <td>
+                <form th:action="@{/admin/delete(id=${user.id})}" method="POST">
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    <form th:action="@{/admin/new}" method="GET">
+        <input type="submit" value="Add new user" />
+    </form>
+</div>
+<div>
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Log out" />
+    </form>
+</div>
+
 
 </body>
 </html>
