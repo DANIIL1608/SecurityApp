@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private String username;
     @NotEmpty(message = "Уж придумай что-нить")
     private String password;
-    @NotNull
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
