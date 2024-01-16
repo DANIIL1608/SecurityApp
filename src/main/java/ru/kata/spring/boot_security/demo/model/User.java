@@ -18,17 +18,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Min(value = 0, message = "ля ты выдумщик/ца")
-    @Max(value = 100, message = "Вам больше подойдет перо и пергамент")
+
     private int age;
-    @Size(min = 2, max = 15, message = "не жадничай буквы, ну и не перебащивай")
+
     private String name;
-    @Size(min = 2, max = 15, message = "не жадничай буквы, ну и не перебащивай")
+
     private String surname;
-    @Size(min = 4, message = "можем считать, что ты дворник")
+
     private String job;
-    @Email(message = "Некорректный формат")
-    @NotEmpty(message = "Придумай мыло")
+
     private String email;
     @Size(min = 2, max = 10, message = "От 2 до 10 символов накалякай")
     private String username;
