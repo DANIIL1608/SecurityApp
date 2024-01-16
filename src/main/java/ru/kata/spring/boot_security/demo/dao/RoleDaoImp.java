@@ -4,8 +4,6 @@ import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.List;
 
 @Repository
 public class RoleDaoImp implements RoleDao {
@@ -24,11 +22,6 @@ public class RoleDaoImp implements RoleDao {
         entityManager.persist(role);
     }
 
-    @Override
-    public List<Role> getAll() {
-        Query query = entityManager.createQuery("from Role");
-        return query.getResultList();
-    }
 
     @Override
     public Role findById(int id) {
